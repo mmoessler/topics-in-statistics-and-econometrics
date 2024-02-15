@@ -1,0 +1,25 @@
+<script src="./assets/script.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
+</script>
+
+    <!-- jQuery and Bootstrap's JS for tabs functionality (required for the script to work) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        // Initialize the tabsets when the document is ready
+        // $(document).ready(function() {
+        //     window.buildTabsets('optional-toc-id');
+        // });
+        
+        $(document).ready(function() {
+            // Initialize the tabsets
+            window.buildTabsets('optional-toc-id');
+            
+            // Programmatically click the first tab
+            $('.nav-tabs a:first').click();
+        });
+        
+    </script>
