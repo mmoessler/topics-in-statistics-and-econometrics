@@ -5,7 +5,7 @@ This repository contains some *thoughts* and *implementations* of *statistical a
 
 ## Content
 
-* [Point Forecast Evaluation](point_forecast_evaluation.html)
+* [Point Forecast Evaluation](https://raw.githack.com/mmoessler/topics-in-statistics-and-econometrics/main/point_forecast_evaluation.html)
 * ...
 
 ## Implementations
