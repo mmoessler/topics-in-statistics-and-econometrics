@@ -33,7 +33,7 @@ pre {
 }
 
 /* See: https://stackoverflow.com/questions/45360998/code-folding-in-bookdown */
-.code-folding-btn { 
+/* .code-folding-btn { 
   margin-top: -5px;
   margin-bottom: -5px;
   background-color: #e6e6e6; 	
@@ -51,7 +51,7 @@ pre {
 }
 .row { display: flex; }
 .collapse { display: none; }
-.in { display:block }
+.in { display:block } */
 
 /* Vertical scroll bar */
 /*div.sourceCode {*/
@@ -65,8 +65,8 @@ hr {
 /*  margin-top: 0px; */
 }
 
-/* For collapsible No 1 */
-.collapsible01 {
+/* For collapsible */
+.collapsible {
   margin-top: 5px;
   margin-bottom: 5px; 
   background-color: white;
@@ -83,39 +83,16 @@ hr {
   font-size: 12pt;
 }
 
-/* For collapsible No 2*/
-.collapsible02 {
-  margin-top: 5px;
-  margin-bottom: 5px; 
-  background-color: white;
-  color: #333333;
-  font-style: italic;
-  cursor: pointer;
-  width: 100%;
-  padding: 5px;
-  border: 1px solid;
-  border-color: #cccccc;
-  text-align: left;
-  outline: none;
-  font-family: Helvetica;
-  font-size: 16pt;
-}
-
-/*
-.content {
-  display: none;
-}
-*/
-
-/* .cod_content {
-  display: none;
-} */
-
-.cod_content pre.r code {
+/* No initial display of collapsible content */
+.content pre.r code {
   display: none;
 }
 
-.cod_content pre.r {
+.content pre.r {
+  display: none;
+}
+
+.content p img {
   display: none;
 }
 
@@ -164,8 +141,6 @@ h1.exam {
   font-size: 40pt;
 }
 
-
-
 /* Head content 01 */
 .head01 {
   font-size: 20pt;
@@ -189,7 +164,6 @@ h1.exam {
   margin-left: 40px;
   font-size: 16pt
 }
-
 
 /* Emphasis 01 */
 span.emp01 {
@@ -258,8 +232,6 @@ span.R {
 .reph3 {
   font-size: 24px
 }
-
-
 
 /* Margin for references */
 .refsp {
