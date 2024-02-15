@@ -6,7 +6,7 @@ editor_options:
 
 <hr>
 
-# Point forecast evaluation {.tabset .container}
+# Point Forecast Evaluation {.tabset .container}
 
 <hr>
 
@@ -59,7 +59,7 @@ lines(data$DATE, data$VOLQ, lty = 2, col = "darkgreen")
 <button type="button" class="collapsible"> *Show Output* </button>
 <div class="content">
 
-![](figure/unnamed-chunk-3-1.svg)
+![](figure/point-forecast-evaluation/unnamed-chunk-3-1.svg)
 
 </div>
 <!--..........................................................................-->

@@ -17,8 +17,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.cap = '',
                       warning = FALSE,
                       message = FALSE,
-                      fig.path = 'figure/',
-                      cache.path = 'cache/')
+                      fig.path = 'figure/point-forecast-evaluation/',
+                      cache.path = 'cache/point-forecast-evaluation/')
 
 ```
 
