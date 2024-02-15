@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>point_forecast_evaluation</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
+  
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
+  <link rel="stylesheet" href="./assets/style.css">
+
+
+
+      <!-- Your Custom Script -->
+      <script>
+          // Your existing window.buildTabsets function here
+          window.buildTabsets = function(tocID) {
+              
+              console.log("start 1");
+              
+              // build a tabset from a section div with the .tabset class
+              function buildTabset(tabset) {
+                  
+                  // check for fade and pills options
+                  var fade = tabset.hasClass("tabset-fade");
+                  var pills = tabset.hasClass("tabset-pills");
+                  var navClass = pills ? "nav-pills" : "nav-tabs";
+                  
+                  // determine the heading level of the tabset and tabs
+                  var match = tabset.attr('class').match(/level(\d) /);
+                  if (match === null)
+                  return;
+                  var tabsetLevel = Number(match[1]);
+                  var tabLevel = tabsetLevel + 1;
+                  
+                  // find all subheadings immediately below
+                  var tabs = tabset.find("div.section.level" + tabLevel);
+                  
+                  if (!tabs.length)
+                  return;
+                  
+                  // create tablist and tab-content elements
+                  var tabList = $('<ul class="nav ' + navClass + '" role="tablist"></ul>');
+                  $(tabs[0]).before(tabList);
+                  var tabContent = $('<div class="tab-content"></div>');
+                  $(tabs[0]).before(tabContent);
+                  
+                  // build the tabset
+                  var activeTab = 0;
+                  tabs.each(function(i) {
+                      
+                      console.log("found tab");
+                      
+                      // get the tab div
+                      var tab = $(tabs[i]);
+                      
+                      // get the id then sanitize it for use with bootstrap tabs
+                      var id = tab.attr('id');
+                      
+                      // see if this is marked as the active tab
+                      if (tab.hasClass('active'))
+                      activeTab = i;
+                      
+                      // remove any table of contents entries associated with
+                      // this ID (since we'll be removing the heading element)
+                      $("div#" + tocID + " li a[href='#" + id + "']").parent().remove();
+                      
+                      // sanitize the id for use with bootstrap tabs
+                      id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+                      tab.attr('id', id);
+                      
+                      // get the heading element within it, grab it's text, then remove it
+                      var heading = tab.find('h' + tabLevel + ':first');
+                      var headingText = heading.html();
+                      heading.remove();
+                      
+                      // build and append the tab list item
+                      var a = $('<a role="tab" data-toggle="tab">' + headingText + '</a>');
+                      a.attr('href', '#' + id);
+                      a.attr('aria-controls', id);
+                      var li = $('<li role="presentation"></li>');
+                      li.append(a);
+                      tabList.append(li);
+                      
+                      // set it's attributes
+                      tab.attr('role', 'tabpanel');
+                      tab.addClass('tab-pane');
+                      tab.addClass('tabbed-pane');
+                      if (fade)
+                      tab.addClass('fade');
+                      
+                      // move it into the tab content div
+                      tab.detach().appendTo(tabContent);
+                  });
+                  
+                  // set active tab
+                  $(tabList.children('li')[activeTab]).addClass('active');
+                  var active = $(tabContent.children('div.section')[activeTab]);
+                  active.addClass('active');
+                  if (fade)
+                  active.addClass('in');
+                  
+                  if (tabset.hasClass("tabset-sticky"))
+                  tabset.rmarkdownStickyTabs();
+              }
+              
+              // convert section divs with the .tabset class to tabsets
+              var tabsets = $("div.section.tabset");
+              
+              console.log(tabsets);
+              
+              tabsets.each(function(i) {
+                  buildTabset($(tabsets[i]));
+              });
+          };
+          
+      </script>
+
+      <style>
+          
+          ul.nav.nav-tabs {
+              padding: 10px 10px 10px 10px;
+              border-bottom: none;
+          }
+          
+          /* Add a black background color to the top navigation */
+          .nav {
+              background-color: #fdfefe ;
+              overflow: hidden;
+              /* border: 2px solid #5dade2;
+              border-radius: 5px; */
+          }
+          
+          /* Style the links inside the navigation bar */
+          .nav a {
+              float: left;
+              color: #17202a ;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 17px;
+          }
+          
+          /* Change the color of links on hover */
+          .nav a:hover {
+              background-color: #ddd;
+              color: black;
+              border-radius: 5px;
+          }
+          
+          /* Add a color to the active/current link */
+          .nav a.active {
+              background-color: #5dade2;
+              color: white;
+              border-radius: 5px;
+          }
+          
+      </style>    
+</head>
+<body>
+<hr>
+<div id="point-forecast-evaluation"
+class="section level1 tabset container">
+<h1 class="tabset container">Point forecast evaluation</h1>
+<hr>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<hr>
+<ul>
+<li>See <span class="citation">Diebold (2017)</span> (Note, this is
+based on Edition 2017 Version Tuesday 1st August, 2017)</li>
+<li>See Part IV Forecast Evaluation and Combination</li>
+<li>See Chapter 10 Point Forecast Evaluation</li>
+</ul>
+<hr>
+</div>
+<div id="descriptive-analysis" class="section level2">
+<h2>Descriptive Analysis</h2>
+<hr>
+<!--..........................................................................-->
+<button type="button" class="collapsible">
+<em>Show Code</em>
+</button>
+<div class="content">
+<pre class="r"><code># load data set
+
+data &lt;- read.delim(&quot;./data/fcst12input.dat&quot;, header = TRUE, sep=&quot;\t&quot;) 
+
+data$DATE &lt;- seq.Date(from = as.Date(&quot;1988-01-01&quot;), to = as.Date(&quot;1997-07-24&quot;), by = &quot;week&quot;)</code></pre>
+</div>
+<!--..........................................................................-->
+<!--..........................................................................-->
+<button type="button" class="collapsible">
+<em>Show Code</em>
+</button>
+<div class="content">
+<pre class="r"><code># load data set
+plot(data$DATE, data$VOL, type = &quot;l&quot;, xlab = &quot;date&quot;, ylab = &quot;volume&quot;)
+lines(data$DATE, data$VOLJ, lty = 2, col = &quot;red&quot;)
+lines(data$DATE, data$VOLQ, lty = 2, col = &quot;darkgreen&quot;)</code></pre>
+</div>
+<!--..........................................................................-->
+<button type="button" class="collapsible">
+<em>Show Output</em>
+</button>
+<div class="content">
+<p><img src="figure/unnamed-chunk-3-1.svg" /></p>
+</div>
+<!--..........................................................................-->
+<p>Calculate forecast errors for the judgmental <code>VOLJ</code> and
+the quantitative <code>VOLQ</code> forecast errors.</p>
+<!--..........................................................................-->
+<button type="button" class="collapsible">
+<em>Show Code</em>
+</button>
+<div class="content">
+<pre class="r"><code># calculate forecast errors
+data$EJ &lt;- data$VOL - data$VOLJ
+data$EQ &lt;- data$VOL - data$VOLQ</code></pre>
+</div>
+<!--..........................................................................-->
+<hr>
+</div>
+<div id="inferential-analysis" class="section level2">
+<h2>Inferential Analysis</h2>
+<hr>
+<p>Regression of the forecast errors on a constant and an MA(1)
+disturbance.</p>
+<!--..........................................................................-->
+<button type="button" class="collapsible">
+<em>Show Code</em>
+</button>
+<div class="content">
+<pre class="r"><code># regression...
+reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1), method = &quot;CSS-ML&quot;)
+reg.res.q$coef
+reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1), method = &quot;ML&quot;)
+reg.res.q$coef
+reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1), method = &quot;CSS&quot;)
+reg.res.q$coef</code></pre>
+</div>
+<!--..........................................................................-->
+<hr>
+</div>
+<div id="references" class="section level2 container">
+<h2 class="container">References</h2>
+<hr>
+<div id="refs" class="references csl-bib-body hanging-indent"
+line-spacing="2">
+<div id="ref-Diebold2017Forecasting" class="csl-entry">
+Diebold, F. X. (2017). Forecasting in economics, business, finance and
+beyond.
+</div>
+</div>
+</div>
+</div>
+<script src="./assets/script.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
+</script>
+
+    <!-- jQuery and Bootstrap's JS for tabs functionality (required for the script to work) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        // Initialize the tabsets when the document is ready
+        // $(document).ready(function() {
+        //     window.buildTabsets('optional-toc-id');
+        // });
+        
+        $(document).ready(function() {
+            // Initialize the tabsets
+            window.buildTabsets('optional-toc-id');
+            
+            // Programmatically click the first tab
+            $('.nav-tabs a:first').click();
+        });
+        
+    </script>
+</body>
+</html>
