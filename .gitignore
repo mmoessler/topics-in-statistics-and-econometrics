@@ -1,0 +1,30 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# related to references
+references.bib.bak
+references.bib.sav
+references.bib.sav.tmp
+
+# rmarkdown and knitr output
+*_files/
+*_cache/
+#/figure/
+/cache/
+
+# test files
+/tests/
+/old/
+/r-code/
+
+# knit r script
+knit.R
+
+# some notes
+some_notes.txt
+
+# related to docker
+start_services.sh
+dockerfile
