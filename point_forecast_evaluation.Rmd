@@ -109,18 +109,14 @@ data$EQ <- data$VOL - data$VOLQ
 Regression of the forecast errors on a constant and an MA(1) disturbance.
 
 <!--..........................................................................-->
-<button type="button" class="collapsible"> *Show Code* </button>
+<button type="button" class="collapsible"> *Show Code/Output* </button>
 <div class="content">
 
-```{r,include=TRUE,echo=TRUE,results=FALSE,fig.show='hide'}
+```{r,include=TRUE,echo=TRUE,results=TRUE}
 
 # regression...
-reg.res.q <- arima(data$EQ, order = c(0, 0, 1), method = "CSS-ML")
-reg.res.q$coef
-reg.res.q <- arima(data$EQ, order = c(0, 0, 1), method = "ML")
-reg.res.q$coef
-reg.res.q <- arima(data$EQ, order = c(0, 0, 1), method = "CSS")
-reg.res.q$coef
+reg.res.q <- arima(data$EQ, order = c(0, 0, 1))
+reg.res.q
 
 ```
 

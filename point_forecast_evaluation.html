@@ -261,16 +261,22 @@ data$EQ &lt;- data$VOL - data$VOLQ</code></pre>
 disturbance.</p>
 <!--..........................................................................-->
 <button type="button" class="collapsible">
-<em>Show Code</em>
+<em>Show Code/Output</em>
 </button>
 <div class="content">
 <pre class="r"><code># regression...
-reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1), method = &quot;CSS-ML&quot;)
-reg.res.q$coef
-reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1), method = &quot;ML&quot;)
-reg.res.q$coef
-reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1), method = &quot;CSS&quot;)
-reg.res.q$coef</code></pre>
+reg.res.q &lt;- arima(data$EQ, order = c(0, 0, 1))
+reg.res.q</code></pre>
+<pre><code>## 
+## Call:
+## arima(x = data$EQ, order = c(0, 0, 1))
+## 
+## Coefficients:
+##          ma1  intercept
+##       0.9337    -0.0265
+## s.e.  0.0155     0.0796
+## 
+## sigma^2 estimated as 0.8466:  log likelihood = -667.53,  aic = 1341.06</code></pre>
 </div>
 <!--..........................................................................-->
 <hr>
